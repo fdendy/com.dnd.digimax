@@ -1,0 +1,80 @@
+{
+  "scheduleId": "SCH-001",
+  "name": "DIGIMAX DEMO",
+  "zones": [
+    {
+      "zoneId": "ZONE-VIDEO",
+      "zIndex": 1,
+      "pauseWhenOverlay": true,
+
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080
+      },
+
+      "plugin": {
+        "type": "exoplayer",
+
+        "playlist": [
+          {
+            "type": "video",
+            "value": "android.resource://com.dnd.digimax/raw/sample"
+          },
+          {
+            "type": "image",
+            "value": "android.resource://com.dnd.digimax/drawable/amazon",
+            "duration": 5000
+          }
+        ]
+      }
+    },
+
+    {
+      "zoneId": "ZONE-TEXT",
+      "zIndex": 2,
+      "bounds": {
+        "x": 0,
+        "y": 1000,
+        "width": 1920,
+        "height": 80
+      },
+
+      "plugin": {
+        "type": "runningtext",
+        "playlist": [
+          {
+            "type": "text",
+            "value": "SELAMAT DATANG DI DIGIMAX"
+          }
+        ]
+      }
+    },
+
+    {
+      "zoneId": "ZONE-WEB",
+      "zIndex": 100,
+      "overlay": true,
+      "overlayDuration": 10000,
+      "overlayInterval": 30000,
+
+      "bounds": {
+        "x": 200,
+        "y": 120,
+        "width": 1520,
+        "height": 760
+      },
+
+      "plugin": {
+        "type": "webview",
+        "playlist": [
+          {
+            "type": "url",
+            "value": "https://www.google.com"
+          }
+        ]
+      }
+    }
+  ]
+}

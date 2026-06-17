@@ -4,6 +4,16 @@ public enum RuntimePhase {
 
     NONE,
 
+    INITIALIZING,
+
+    READY,
+
+    RUNNING,
+
+    RECOVERY,
+
+    STOPPED,
+
     BOOTSTRAP,
 
     INSPECT,

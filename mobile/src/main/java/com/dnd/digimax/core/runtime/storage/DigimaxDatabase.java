@@ -10,7 +10,8 @@ import com.dnd.digimax.core.runtime.storage.entity.ContentEntity;
         entities = {
                 ContentEntity.class
         },
-        version = 1
+        version = 1,
+        exportSchema = false
 )
 public abstract class DigimaxDatabase
         extends RoomDatabase {

@@ -1,6 +1,7 @@
 package com.dnd.digimax.feature.playback.pop.provider;
 
 import org.json.JSONObject;
+import org.json.JSONException;
 
 import com.dnd.digimax.feature.playback.pop.uploader.PopPayload;
 
@@ -20,25 +21,31 @@ public class InternalCmsPopProvider
         JSONObject json =
                 new JSONObject();
 
-        json.put(
-                "deviceId",
-                payload.getDeviceId());
+        try {
+            json.put(
+                    "deviceId",
+                    payload.getDeviceId());
 
-        json.put(
-                "contentId",
-                payload.getContentId());
+            json.put(
+                    "contentId",
+                    payload.getContentId());
 
-        json.put(
-                "startedAt",
-                payload.getStartedAt());
+            json.put(
+                    "startedAt",
+                    payload.getStartedAt());
 
-        json.put(
-                "completedAt",
-                payload.getCompletedAt());
+            json.put(
+                    "completedAt",
+                    payload.getCompletedAt());
 
-        json.put(
-                "duration",
-                payload.getDuration());
+            json.put(
+                    "duration",
+                    payload.getDuration());
+        } catch (JSONException e) {
+            throw new IllegalStateException(
+                    "Failed to build internal CMS POP payload",
+                    e);
+        }
 
         return json;
     }

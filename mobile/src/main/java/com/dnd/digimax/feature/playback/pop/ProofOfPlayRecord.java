@@ -12,6 +12,8 @@ public class ProofOfPlayRecord {
 
     private String pluginType;
 
+    private String provider;
+
     private long startedAt;
 
     private long completedAt;
@@ -68,6 +70,16 @@ public class ProofOfPlayRecord {
             String pluginType) {
 
         this.pluginType = pluginType;
+    }
+
+    public String getProvider() {
+        return provider;
+    }
+
+    public void setProvider(
+            String provider) {
+
+        this.provider = provider;
     }
 
     public long getStartedAt() {

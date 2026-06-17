@@ -31,6 +31,12 @@ public class RuntimeStateMachine {
         context.setPhase(phase);
     }
 
+    public void moveTo(
+            RuntimePhase phase) {
+
+        updatePhase(phase);
+    }
+
     public synchronized boolean transition(
             RuntimeState targetState) {
 

@@ -80,7 +80,6 @@ public final class AppController {
                 if (!secure) {
                     RuntimeLifecycleManager.moveTo(RuntimeState.SAFE_MODE);
                     publish("security_startup_failed",true);
-                    android.os.Process.killProcess(android.os.Process.myPid());
                     return;
                 }
                 systemInfoProvider.load();

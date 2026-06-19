@@ -46,10 +46,10 @@ public class WatchdogService
             "digimax_watchdog";
 
     private static final long INTERVAL_MS =
-            10000;
+            20000;
 
     private static final long RESTART_COOLDOWN =
-            15000;
+            30000;
 
     //================================================
     // THREAD
@@ -84,7 +84,6 @@ public class WatchdogService
 
     @Override
     public void onCreate() {
-
         super.onCreate();
 
         startForegroundSafe();

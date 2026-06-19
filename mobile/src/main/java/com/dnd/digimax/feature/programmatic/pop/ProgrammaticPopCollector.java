@@ -1,6 +1,7 @@
 package com.dnd.digimax.feature.programmatic.pop;
 
 import com.dnd.digimax.feature.playback.pop.ProofOfPlayRecord;
+import com.dnd.digimax.feature.programmatic.model.ProgrammaticDecision;
 
 public class ProgrammaticPopCollector {
 

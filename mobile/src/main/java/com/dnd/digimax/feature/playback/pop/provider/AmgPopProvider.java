@@ -1,6 +1,7 @@
 package com.dnd.digimax.feature.playback.pop.provider;
 
 import org.json.JSONObject;
+import org.json.JSONException;
 
 import com.dnd.digimax.feature.playback.pop.uploader.PopPayload;
 
@@ -20,21 +21,27 @@ public class AmgPopProvider
         JSONObject json =
                 new JSONObject();
 
-        json.put(
-                "deviceId",
-                payload.getDeviceId());
+        try {
+            json.put(
+                    "deviceId",
+                    payload.getDeviceId());
 
-        json.put(
-                "contentId",
-                payload.getContentId());
+            json.put(
+                    "contentId",
+                    payload.getContentId());
 
-        json.put(
-                "duration",
-                payload.getDuration());
+            json.put(
+                    "duration",
+                    payload.getDuration());
 
-        json.put(
-                "completed",
-                payload.isCompleted());
+            json.put(
+                    "completed",
+                    payload.isCompleted());
+        } catch (JSONException e) {
+            throw new IllegalStateException(
+                    "Failed to build AMG POP payload",
+                    e);
+        }
 
         return json;
     }

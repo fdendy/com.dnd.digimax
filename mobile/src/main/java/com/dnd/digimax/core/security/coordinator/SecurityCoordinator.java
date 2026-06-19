@@ -3,6 +3,7 @@ package com.dnd.digimax.core.security.coordinator;
 import android.content.Context;
 import android.util.Log;
 
+import com.dnd.digimax.BuildConfig;
 import com.dnd.digimax.core.security.checker.BuildCheck;
 import com.dnd.digimax.core.security.checker.DebuggerCheck;
 import com.dnd.digimax.core.security.checker.FridaCheck;
@@ -30,6 +31,11 @@ public class SecurityCoordinator {
 
     // ENTRY POINT
     public boolean checkStartupIntegrity() {
+
+        if (BuildConfig.DEBUG) {
+            Log.w(TAG, "Startup integrity checks bypassed for debug build");
+            return true;
+        }
 
         // 🔥 1. SIGNATURE (PALING KRITIS)
         if (!checkSignature()) {
@@ -74,9 +80,6 @@ public class SecurityCoordinator {
     // FAIL STRATEGY (SAFE) =========================
     private boolean failFast(String reason) {
         Log.e(TAG, "SECURITY VIOLATION: " + reason);
-        try { Thread.sleep(300); } catch (Exception ignored) {}
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(0);
         return false;
     }
 }

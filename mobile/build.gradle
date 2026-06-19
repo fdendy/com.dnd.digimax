@@ -3,6 +3,19 @@ plugins {
     alias(libs.plugins.kotlin.android)
 }
 
+def signingValue = { name ->
+    findProperty(name) ?: System.getenv(name)
+}
+
+def releaseKeystoreFile = signingValue("DIGIMAX_KEYSTORE_FILE") ?: "dndkey.jks"
+def releaseKeystorePassword = signingValue("DIGIMAX_KEYSTORE_PASSWORD")
+def releaseKeyAlias = signingValue("DIGIMAX_KEY_ALIAS")
+def releaseKeyPassword = signingValue("DIGIMAX_KEY_PASSWORD")
+def hasReleaseSigning = releaseKeystorePassword &&
+        releaseKeyAlias &&
+        releaseKeyPassword &&
+        file(releaseKeystoreFile).exists()
+
 android {
     namespace 'com.dnd.digimax'
     compileSdk 36
@@ -18,16 +31,10 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file("dndkey.jks")
-            storePassword "8thMiles"
-            keyAlias "key0"
-            keyPassword "8thMiles"
-        }
-        debug {
-            storeFile file("dndkey.jks")
-            storePassword "8thMiles"
-            keyAlias "key0"
-            keyPassword "8thMiles"
+            storeFile file(releaseKeystoreFile)
+            storePassword releaseKeystorePassword
+            keyAlias releaseKeyAlias
+            keyPassword releaseKeyPassword
         }
     }
 
@@ -37,14 +44,15 @@ android {
     }
     buildTypes {
         debug {
-            debuggable false
-            signingConfig signingConfigs.release
+            debuggable true
         }
         release {
-            debuggable = true
+            debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            if (hasReleaseSigning) {
+                signingConfig signingConfigs.release
+            }
         }
     }
     compileOptions {

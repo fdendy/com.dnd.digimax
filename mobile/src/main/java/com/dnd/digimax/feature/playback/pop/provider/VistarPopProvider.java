@@ -1,6 +1,7 @@
 package com.dnd.digimax.feature.playback.pop.provider;
 
 import org.json.JSONObject;
+import org.json.JSONException;
 
 import com.dnd.digimax.feature.playback.pop.uploader.PopPayload;
 
@@ -20,21 +21,27 @@ public class VistarPopProvider
         JSONObject json =
                 new JSONObject();
 
-        json.put(
-                "screenId",
-                payload.getDeviceId());
+        try {
+            json.put(
+                    "screenId",
+                    payload.getDeviceId());
 
-        json.put(
-                "assetId",
-                payload.getContentId());
+            json.put(
+                    "assetId",
+                    payload.getContentId());
 
-        json.put(
-                "playStart",
-                payload.getStartedAt());
+            json.put(
+                    "playStart",
+                    payload.getStartedAt());
 
-        json.put(
-                "playEnd",
-                payload.getCompletedAt());
+            json.put(
+                    "playEnd",
+                    payload.getCompletedAt());
+        } catch (JSONException e) {
+            throw new IllegalStateException(
+                    "Failed to build Vistar POP payload",
+                    e);
+        }
 
         return json;
     }

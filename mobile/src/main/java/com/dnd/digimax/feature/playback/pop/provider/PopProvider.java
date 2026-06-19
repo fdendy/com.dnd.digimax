@@ -8,6 +8,5 @@ public interface PopProvider {
 
     String getProviderName();
 
-    JSONObject buildPayload(
-            PopPayload payload);
+    JSONObject buildPayload(PopPayload payload);
 }

@@ -1,6 +1,7 @@
 package com.dnd.digimax.feature.playback.pop.provider;
 
 import org.json.JSONObject;
+import org.json.JSONException;
 
 import com.dnd.digimax.feature.playback.pop.uploader.PopPayload;
 
@@ -20,17 +21,23 @@ public class BroadsignPopProvider
         JSONObject json =
                 new JSONObject();
 
-        json.put(
-                "displayUnit",
-                payload.getDeviceId());
+        try {
+            json.put(
+                    "displayUnit",
+                    payload.getDeviceId());
 
-        json.put(
-                "content",
-                payload.getContentId());
+            json.put(
+                    "content",
+                    payload.getContentId());
 
-        json.put(
-                "duration",
-                payload.getDuration());
+            json.put(
+                    "duration",
+                    payload.getDuration());
+        } catch (JSONException e) {
+            throw new IllegalStateException(
+                    "Failed to build Broadsign POP payload",
+                    e);
+        }
 
         return json;
     }
